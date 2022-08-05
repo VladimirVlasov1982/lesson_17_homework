@@ -1,6 +1,5 @@
-# Модели и их схемы
-from config import db
-from marshmallow import Schema, fields
+# Модели
+from run import db
 
 
 class Movie(db.Model):
@@ -18,18 +17,6 @@ class Movie(db.Model):
     director = db.relationship("Director")
 
 
-class MovieSchema(Schema):
-    """Схема фильма"""
-    id = fields.Int()
-    title = fields.Str()
-    description = fields.Str()
-    trailer = fields.Str()
-    year = fields.Int()
-    rating = fields.Float()
-    genre = fields.Nested('GenreSchema', many=False, only=['name'])
-    director = fields.Nested('DirectorSchema', many=False, only=['name'])
-
-
 class Director(db.Model):
     """Модель режиссера"""
     __tablename__ = 'director'
@@ -37,30 +24,8 @@ class Director(db.Model):
     name = db.Column(db.String(255))
 
 
-class DirectorSchema(Schema):
-    """Схема режиссера"""
-    id = fields.Int()
-    name = fields.Str()
-
-
 class Genre(db.Model):
     """Модель жанра"""
     __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-
-
-class GenreSchema(Schema):
-    """Схема жанра"""
-    id = fields.Int()
-    name = fields.Str()
-
-
-movie_shema = MovieSchema()
-movies_shema = MovieSchema(many=True)
-
-director_shema = DirectorSchema()
-directors_shema = DirectorSchema(many=True)
-
-genre_shema = GenreSchema()
-genres_shema = GenreSchema(many=True)
