@@ -1,16 +1,11 @@
+from config import db, app, api, PER_PAGE
 from flask import request
-from flask_paginate import get_page_parameter
-from flask_sqlalchemy import SQLAlchemy
-from app import create_app
-from config import DevConfig, PER_PAGE
-from flask_restx import Resource, Api
-from models import *
+from flask_restx import Resource
+from models import Movie, Director, Genre
 from schemas import *
+from flask_paginate import get_page_parameter
 
-app = create_app(DevConfig)
 
-db = SQLAlchemy(app)
-api = Api(app)
 
 movie_ns = api.namespace('movies')
 genre_ns = api.namespace('genres')
@@ -140,6 +135,7 @@ class GenreView(Resource):
                 return "", 204
         except:
             return "", 404
+
 
     def delete(self, gid: int):
         """

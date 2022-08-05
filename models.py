@@ -1,5 +1,5 @@
 # Модели
-from run import db
+from config import db
 
 
 class Movie(db.Model):
