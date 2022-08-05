@@ -4,7 +4,6 @@ from config import app, api, PER_PAGE
 from flask_restx import Resource
 from models import *
 
-
 movie_ns = api.namespace('movies')
 genre_ns = api.namespace('genres')
 director_ns = api.namespace('directors')
