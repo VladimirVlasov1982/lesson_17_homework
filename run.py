@@ -66,34 +66,15 @@ class MovieView(Resource):
         try:
             req_json = request.json
             movie = Movie.query.get(mid)
-            if "title" in req_json:
-                movie.title = req_json.get("title")
-                db.session.add(movie)
-                db.session.commit()
-            if "description" in req_json:
-                movie.description = req_json.get("description")
-                db.session.add(movie)
-                db.session.commit()
-            if "trailer" in req_json:
-                movie.trailer = req_json.get("trailer")
-                db.session.add(movie)
-                db.session.commit()
-            if "year" in req_json:
-                movie.year = req_json.get("year")
-                db.session.add(movie)
-                db.session.commit()
-            if "rating" in req_json:
-                movie.rating = req_json.get("rating")
-                db.session.add(movie)
-                db.session.commit()
-            if "genre_id" in req_json:
-                movie.genre_id = req_json.get("genre_id")
-                db.session.add(movie)
-                db.session.commit()
-            if "director_id" in req_json:
-                movie.director_id = req_json.get("director_id")
-                db.session.add(movie)
-                db.session.commit()
+            movie.title = req_json.get("title")
+            movie.description = req_json.get("description")
+            movie.trailer = req_json.get("trailer")
+            movie.year = req_json.get("year")
+            movie.rating = req_json.get("rating")
+            movie.genre_id = req_json.get("genre_id")
+            movie.director_id = req_json.get("director_id")
+            db.session.add(movie)
+            db.session.commit()
             return movie_shema.dump(movie), 204
         except:
             return "", 404
@@ -150,10 +131,9 @@ class DirectorView(Resource):
         try:
             director = Director.query.get(did)
             req_json = request.json
-            if "name" in req_json:
-                director.name = req_json.get("name")
-                db.session.add(director)
-                db.session.commit()
+            director.name = req_json.get("name")
+            db.session.add(director)
+            db.session.commit()
             return director_shema.dump(director), 204
         except:
             return "", 404
@@ -213,10 +193,9 @@ class GenreView(Resource):
         try:
             genre = Genre.query.get(gid)
             req_json = request.json
-            if "name" in req_json:
-                genre.name = req_json.get("name")
-                db.session.add(genre)
-                db.session.commit()
+            genre.name = req_json.get("name")
+            db.session.add(genre)
+            db.session.commit()
             return genre_shema.dump(genre), 204
         except:
             return "", 404
